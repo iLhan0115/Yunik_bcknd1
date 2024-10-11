@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 // Routes Here
 const authRoutes = require('./routes/authRoutes');
 const userRoute = require('./routes/userRoute');
+const departmentRoute = require('./routes/departmentRoute');
+const courseRoute = require('./routes/courseRoute');
+const studentRoute = require('./routes/studentRoute');
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +20,9 @@ res.send("Allan Pogi, MIT");
 // Endpoint Here
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoute);
+app.use('/api/department', departmentRoute);
+app.use('/api/course', courseRoute);
+app.use('/api/student', studentRoute);
 
 const PORT = 6000;
 

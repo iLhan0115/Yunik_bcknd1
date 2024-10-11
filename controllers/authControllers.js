@@ -3,13 +3,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
-    const { fullname, username, password } = req.body;
+    const { firstname, lastname, username, password } = req.body;
 
     try {
         const hashedPassword = await bcrypt.hash (password, 10);
-        const [rows] = await pool.query('INSERT INTO users (fullname, username, password) VALUES (?, ?, ?)', [fullname, username, hashedPassword]);
+        const [rows] = await pool.query('INSERT INTO users (firstname, lastname, username, password) VALUES (?, ?, ?, ?)', [firstname, lastname, username, hashedPassword]);
 
-        res.status(201).json({ message: 'User registered successfully!' });
+        res.status(201).json({ message: 'Ok na BOSS!' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
