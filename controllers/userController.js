@@ -34,7 +34,7 @@ const createUser = async (req, res) => {
     
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const [result] = await pool.query('INSERT INTO users (firstname, lastname, username, password) VALUES (?, ?, ?)', [firstname, lastname, username, hashedPassword]);        
+        const [result] = await pool.query('INSERT INTO users (firstname, lastname, username, passwords) VALUES (?, ?, ?)', [firstname, lastname, username, hashedPassword]);        
         res.status(201).json({ id: result.insertId, firstname, lastname, username, password });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -47,7 +47,7 @@ const updateUser = async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const [result] = await pool.query('UPDATE users SET firstname = ?, lastname = ?, username = ?, password = ? WHERE user_id = ?', [firstname, lastname, username, hashedPassword, id]);
+        const [result] = await pool.query('UPDATE users SET firstname = ?, lastname = ?, username = ?, passwords = ? WHERE user_id = ?', [firstname, lastname, username, hashedPassword, id]);
        
         if (result.affectedRows === 0) {
           return res.status(404).json({ error: 'User not found' });
